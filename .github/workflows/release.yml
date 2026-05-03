@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+env:
+  CARGO_INCREMENTAL: "0"
+
+jobs:
+  build:
+    name: Build extension artifact
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          targets: wasm32-wasip2
+
+      - name: Build Wasm extension
+        run: cargo build --target wasm32-wasip2 --release
+
+      - name: Package extension metadata
+        run: |
+          mkdir -p dist
+          cp extension.toml README.md LICENSE dist/
+          cp -r debug_adapter_schemas dist/
+          cp target/wasm32-wasip2/release/zed_mplab_debug.wasm dist/extension.wasm
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: zed-mplab-debug
+          path: dist

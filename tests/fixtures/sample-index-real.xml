@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Synthetic excerpt mirroring the real Microchip index.idx shape:
+  - top-level <idx xmlns:atmel="...">
+  - <pdsc url="<host>" name="<Vendor>.<Short>.pdsc" version="..." atmel:name="<Short>">
+  - Multiple <atmel:release> entries; the first is the latest.
+  - Devices under <atmel:releases>/<atmel:release>/<atmel:devices>/<atmel:device name="...">.
+  - Components under <atmel:releases>/<atmel:release>/<atmel:components>/<atmel:component Cclass Cgroup Csub Cvendor>.
+-->
+<idx xmlns:atmel="http://packs.download.atmel.com/pack-idx-atmel-extension">
+  <pdsc url="packs.download.microchip.com"
+        name="Microchip.SAMV71_DFP.pdsc"
+        version="4.13.257"
+        atmel:name="SAMV71_DFP"
+        atmel:name.gz="Microchip.SAMV71_DFP.pdsc.gz">
+    <atmel:releases>
+      <atmel:release version="4.13.257" date="2025-02-19">
+        <atmel:description>Latest release.</atmel:description>
+        <atmel:devices>
+          <atmel:device name="ATSAMV71Q21B" family="SAMV71" core="Cortex-M7"/>
+          <atmel:device name="ATSAMV71Q20B" family="SAMV71" core="Cortex-M7"/>
+        </atmel:devices>
+      </atmel:release>
+      <atmel:release version="4.12.100" date="2024-09-01">
+        <atmel:description>Older release — must be ignored for device lookup.</atmel:description>
+        <atmel:devices>
+          <atmel:device name="ATSAMV71Q21" family="SAMV71" core="Cortex-M7"/>
+        </atmel:devices>
+      </atmel:release>
+    </atmel:releases>
+  </pdsc>
+  <!--
+    TPs in the real index list every device they support. Placed AFTER the
+    DFP on purpose: a naive rfind-by-device would pick this pack for
+    ATSAMV71Q21B. The `atmel:tool-name` attribute makes the resolver skip
+    it during device resolution.
+  -->
+  <pdsc url="packs.download.microchip.com"
+        name="Microchip.mEDBG_TP.pdsc"
+        version="1.2.438"
+        atmel:name="mEDBG_TP"
+        atmel:name.gz="Microchip.mEDBG_TP.pdsc.gz"
+        atmel:tool-name="mEDBG">
+    <atmel:releases>
+      <atmel:release version="1.2.438" date="2025-02-19">
+        <atmel:devices>
+          <atmel:device name="ATSAMV71Q21B" family="SAMV71"/>
+        </atmel:devices>
+        <atmel:components>
+          <atmel:component Cclass="ToolFirmware"
+                           Cgroup="MPLABX"
+                           Cversion="1.2.438"
+                           Csub="mEDBG"
+                           Cvendor="Microchip"/>
+        </atmel:components>
+      </atmel:release>
+    </atmel:releases>
+  </pdsc>
+  <pdsc url="packs.download.microchip.com"
+        name="Microchip.Simulator_TP.pdsc"
+        version="1.8.730"
+        atmel:name="Simulator_TP"
+        atmel:name.gz="Microchip.Simulator_TP.pdsc.gz"
+        atmel:tool-name="Simulator">
+    <atmel:releases>
+      <atmel:release version="1.8.730" date="2025-02-19">
+        <atmel:devices/>
+        <atmel:components>
+          <atmel:component Cclass="ToolFirmware"
+                           Cgroup="MPLABX"
+                           Cversion="1.8.730"
+                           Csub="Simulator"
+                           Cvendor="Microchip">
+            <atmel:description>Firmware for Simulator</atmel:description>
+          </atmel:component>
+        </atmel:components>
+      </atmel:release>
+      <atmel:release version="1.7.660" date="2024-01-17">
+        <atmel:devices/>
+        <atmel:components>
+          <atmel:component Cclass="ToolFirmware"
+                           Cgroup="MPLABX"
+                           Cversion="1.7.660"
+                           Csub="Simulator"
+                           Cvendor="Microchip">
+            <atmel:description>Older simulator firmware — must not win.</atmel:description>
+          </atmel:component>
+        </atmel:components>
+      </atmel:release>
+    </atmel:releases>
+  </pdsc>
+</idx>

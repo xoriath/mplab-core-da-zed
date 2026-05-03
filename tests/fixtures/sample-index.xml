@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+  <pack vendor="Microchip" name="PIC18F-Q_DFP" version="1.0.0" url="packs/Microchip.PIC18F-Q_DFP.1.0.0.pack" checksum="sha256:aaaaaaaa">
+    <devices>
+      <device name="PIC18F47Q10" />
+    </devices>
+  </pack>
+  <pack vendor="Microchip" name="PIC18F-Q_DFP" version="2.0.0" url="packs/Microchip.PIC18F-Q_DFP.2.0.0.pack" checksum="sha256:bbbbbbbb">
+    <devices>
+      <device name="PIC18F47Q10" />
+      <device name="PIC18F57Q10" />
+    </devices>
+  </pack>
+</index>

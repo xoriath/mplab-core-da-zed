@@ -1,0 +1,146 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MPLAB debug configuration",
+  "description": "Launch/attach configuration for the MPLAB debug adapter.",
+  "type": "object",
+  "required": ["request"],
+  "properties": {
+    "request": {
+      "type": "string",
+      "enum": ["launch", "attach", "erase"],
+      "description": "Whether to launch, attach, or erase using the MPLAB backend. Zed launch wiring currently supports launch and attach."
+    },
+    "program": {
+      "type": "string",
+      "description": "Path to the primary ELF/HEX to load onto the target."
+    },
+    "programFiles": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Additional program files to load."
+    },
+    "extraDebugFiles": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Additional debug symbol files."
+    },
+    "debugServer": {
+      "oneOf": [
+        { "type": "integer", "minimum": 0, "maximum": 65535 },
+        { "type": "string" }
+      ],
+      "description": "If set, connect to an already-running DAP server. Accepts a TCP port or host:port."
+    },
+    "debugServerHost": {
+      "type": "string",
+      "default": "127.0.0.1",
+      "description": "Host for external DAP mode when debugServer is only a port."
+    },
+    "stopOnEntry": {
+      "type": "boolean",
+      "default": false,
+      "description": "Halt at program entry."
+    },
+    "noDebug": {
+      "type": "boolean",
+      "default": false,
+      "description": "Program without starting a debug session."
+    },
+    "tool": {
+      "type": "string",
+      "default": "PKOB nano",
+      "enum": [
+        "Atmel-ICE",
+        "Curiosity/Starter Kits (PKOB4)",
+        "EDBG",
+        "ICD 4",
+        "ICD 5",
+        "ICE 4",
+        "J-32",
+        "J-Link",
+        "JTAGICE3",
+        "mEDBG",
+        "PICkit 4",
+        "PICkit 5",
+        "PICkit Basic",
+        "PKOB nano",
+        "Power Debugger",
+        "Simulator",
+        "Snap"
+      ],
+      "description": "Microchip programmer/debugger tool."
+    },
+    "serial": {
+      "type": "string",
+      "description": "Tool serial number."
+    },
+    "device": {
+      "type": "string",
+      "description": "Microchip device name, e.g. PIC18F47Q10 or ATmega328P."
+    },
+    "interface": {
+      "type": "string",
+      "enum": [
+        "ICSP",
+        "JTAG",
+        "PDI",
+        "SWD",
+        "UPDI",
+        "4-Wire JTAG",
+        "2-wire JTAG"
+      ],
+      "description": "Physical debug/programming interface."
+    },
+    "interfaceSpeed": {
+      "oneOf": [{ "type": "integer" }, { "type": "string" }],
+      "description": "Interface clock speed."
+    },
+    "toolPackVersion": {
+      "type": "string",
+      "description": "Debugger tool pack version."
+    },
+    "packVendor": {
+      "type": "string",
+      "description": "Preferred device pack vendor."
+    },
+    "packName": {
+      "type": "string",
+      "description": "Preferred device pack name."
+    },
+    "packVersion": {
+      "type": "string",
+      "description": "Preferred device pack version."
+    },
+    "sourceFileMap": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "description": "Source path remapping table."
+    },
+    "properties": {
+      "type": "object",
+      "description": "Adapter/backend-specific launch properties."
+    },
+    "disassemblerPath": {
+      "type": "string",
+      "description": "Path to an external disassembler."
+    },
+    "mdfpPath": {
+      "type": "string",
+      "description": "Path to a Microchip Device Family Pack."
+    },
+    "mprocessor": {
+      "type": "string",
+      "description": "Processor argument for disassembly/debug tools."
+    },
+    "disassemblerArgs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Extra arguments for the disassembler."
+    },
+    "processId": {
+      "oneOf": [{ "type": "integer" }, { "type": "string" }],
+      "description": "Process id to attach to (attach only)."
+    }
+  },
+  "additionalProperties": true
+}

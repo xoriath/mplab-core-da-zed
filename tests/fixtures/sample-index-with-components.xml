@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Minimal synthetic excerpt of index.idx that mirrors the shape Microchip
+  ships: every <pack> can declare supported <devices> and a set of atmel
+  <components> (using CMSIS-style C* attributes). Two ToolFirmware packs are
+  included, with different `Csub` values, to exercise resolve_tool().
+-->
+<index>
+  <pack vendor="Microchip" name="SAMV71_DFP" version="4.10.230" url="packs/Microchip.SAMV71_DFP.4.10.230.atpack" checksum="sha256:1111111111111111">
+    <devices>
+      <device Dname="ATSAMV71Q21B" />
+      <device Dname="ATSAMV71Q20B" />
+    </devices>
+  </pack>
+
+  <pack vendor="Microchip" name="SAM_TP" version="1.5.23" url="packs/Microchip.SAM_TP.1.5.23.atpack" checksum="sha256:2222222222222222">
+    <components>
+      <component Cvendor="Microchip" Cclass="ToolFirmware" Cgroup="MPLABX" Csub="Simulator" Cversion="1.5.23" />
+      <component Cvendor="Microchip" Cclass="ToolFirmware" Cgroup="MPLABX" Csub="PICkit4" Cversion="1.5.23" />
+    </components>
+  </pack>
+
+  <pack vendor="Microchip" name="SAM_TP" version="1.6.0" url="packs/Microchip.SAM_TP.1.6.0.atpack" checksum="sha256:3333333333333333">
+    <components>
+      <component Cvendor="Microchip" Cclass="ToolFirmware" Cgroup="MPLABX" Csub="Simulator" Cversion="1.6.0" />
+    </components>
+  </pack>
+
+  <pack vendor="OtherVendor" name="Bogus_TP" version="9.9.9" url="packs/OtherVendor.Bogus_TP.9.9.9.atpack">
+    <components>
+      <!-- Same Csub but wrong Cvendor; must NOT match resolve_tool("Simulator"). -->
+      <component Cvendor="OtherVendor" Cclass="ToolFirmware" Cgroup="MPLABX" Csub="Simulator" Cversion="9.9.9" />
+    </components>
+  </pack>
+</index>

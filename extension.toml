@@ -1,0 +1,36 @@
+id = "mplab-core-debugger"
+name = "MPLAB Debug"
+version = "0.1.0"
+schema_version = 1
+authors = ["Microchip Technology Inc."]
+description = "Debug Microchip PIC/AVR/dsPIC/SAM targets via the MPLAB debugger backend."
+repository = "https://github.com/microchip-pic-avr-tools/zed-mplab-debug"
+
+# Registers the `mplab` debug adapter type. Users write `"adapter": "mplab"` in
+# their `.zed/debug.json`. The JSON schema lives at
+# `debug_adapter_schemas/mplab.json` (Zed's default location).
+[debug_adapters.mplab]
+
+# --- Capabilities -----------------------------------------------------------
+# All network access is narrowly scoped to the two Microchip hosts we use:
+# the shelf manifest + RCP/JRE archives on shelf.download.microchip.com,
+# and DFP packs + the pack index on packs.download.microchip.com.
+
+[[capabilities]]
+kind = "download_file"
+host = "shelf.download.microchip.com"
+path = ["**"]
+
+[[capabilities]]
+kind = "download_file"
+host = "packs.download.microchip.com"
+path = ["**"]
+
+# `process:exec` is required so pre-flight discovery (e.g. probing for a
+# user-supplied `java` on PATH) can run. The spawned RCP process itself is
+# launched by Zed via the returned `DebugAdapterBinary.command` and does not
+# count against this capability.
+[[capabilities]]
+kind = "process:exec"
+command = "*"
+args = ["**"]
